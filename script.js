@@ -1,9 +1,10 @@
 // Generating random numbers in the input box
 const generateButton = document.getElementsByClassName("generate-btn")[0];
-const randomNumberOutput = document.getElementById("random-output");
+const pinOutput = document.getElementById("pin-output");
 generateButton.addEventListener("click", function () {
     const verificationCode = randomRange(1000, 9999);
-    randomNumberOutput.value = verificationCode;
+    pinOutput.value = verificationCode;
+    resetEverything();
 });
 function randomRange(minNum, maxNum) {
     const randomNumber = Math.floor(Math.random() * (maxNum - minNum) + minNum);
@@ -32,7 +33,7 @@ const submitButton = document.getElementsByClassName("submit-btn")[0];
 const failedMessage = document.getElementById("failed");
 const successMessage = document.getElementById("success");
 submitButton.addEventListener("click", function () {
-    const generatedCode = randomNumberOutput.value;
+    const generatedCode = pinOutput.value;
     const userInput = pinInput.value;
     if (generatedCode == userInput) {
         successMessage.style.display = "block";
@@ -40,3 +41,8 @@ submitButton.addEventListener("click", function () {
         failedMessage.style.display = "block";
     }
 });
+function resetEverything() {
+    pinInput.value = "";
+    failedMessage.style.display = "none";
+    successMessage.style.display = "none";
+}
