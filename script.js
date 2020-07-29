@@ -52,7 +52,7 @@ submitButton.addEventListener("click", function () {
     }
     if (totalTry == 0) {
         submitButton.classList.add("disabled");
-        pinOutput.value = "";
+        pinOutput.value = "Pin Expired. Generate New Pin.";
     }
 });
 
