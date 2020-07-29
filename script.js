@@ -39,14 +39,18 @@ submitButton.addEventListener("click", function () {
     const userInput = pinInput.value;
     if (generatedCode !== userInput && totalTry > 0) {
         failedMessage.style.display = "block";
+        successMessage.style.display = "none";
+        removeUserInput();
         totalTry = totalTry - 1;
         tryLeftMessage.innerText = totalTry + " try left";
     } else if (generatedCode == userInput) {
         successMessage.style.display = "block";
         failedMessage.style.display = "none";
+        removeUserInput();
     }
     if (totalTry == 0) {
         submitButton.classList.add("disabled");
+        pinOutput.value = "";
     }
 });
 
@@ -58,4 +62,9 @@ function resetEverything() {
     tryLeftMessage.innerText = 3 + " try left";
     failedMessage.style.display = "none";
     successMessage.style.display = "none";
+}
+
+//removing user input after submission
+function removeUserInput() {
+    pinInput.value = "";
 }
