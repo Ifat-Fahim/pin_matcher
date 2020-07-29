@@ -47,6 +47,8 @@ submitButton.addEventListener("click", function () {
         successMessage.style.display = "block";
         failedMessage.style.display = "none";
         removeUserInput();
+        totalTry = 3;
+        tryLeftMessage.innerText = totalTry + " try left";
     }
     if (totalTry == 0) {
         submitButton.classList.add("disabled");
