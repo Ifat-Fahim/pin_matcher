@@ -15,15 +15,15 @@ function randomRange(minNum, maxNum) {
 const pinInput = document.getElementById("pin-input");
 const numberKeys = document.querySelectorAll(".button");
 for (let i = 0; i < numberKeys.length; i++) {
-    const numbers = numberKeys[i];
-    numbers.addEventListener("click", function (event) {
-        const number = event.target.innerText;
-        if (number == "C") {
+    const numberKey = numberKeys[i];
+    numberKey.addEventListener("click", function (event) {
+        const numberKey = event.target.innerText;
+        if (numberKey == "C") {
             pinInput.value = "";
-        } else if (number == "<") {
+        } else if (numberKey == "<") {
             pinInput.value = pinInput.value.slice(0, pinInput.value.length - 1);
         } else {
-            pinInput.value += number;
+            pinInput.value += numberKey;
         }
     });
 }
@@ -32,17 +32,30 @@ for (let i = 0; i < numberKeys.length; i++) {
 const submitButton = document.getElementsByClassName("submit-btn")[0];
 const failedMessage = document.getElementById("failed");
 const successMessage = document.getElementById("success");
+let totalTry = 3;
+const tryLeftMessage = document.getElementsByClassName("action-left")[0];
 submitButton.addEventListener("click", function () {
     const generatedCode = pinOutput.value;
     const userInput = pinInput.value;
-    if (generatedCode == userInput) {
-        successMessage.style.display = "block";
-    } else {
+    if (generatedCode !== userInput && totalTry > 0) {
         failedMessage.style.display = "block";
+        totalTry = totalTry - 1;
+        tryLeftMessage.innerText = totalTry + " try left";
+    } else if (generatedCode == userInput) {
+        successMessage.style.display = "block";
+        failedMessage.style.display = "none";
+    }
+    if (totalTry == 0) {
+        submitButton.classList.add("disabled");
     }
 });
+
+// reset everything to initial stage
 function resetEverything() {
     pinInput.value = "";
+    submitButton.classList.remove("disabled");
+    totalTry = 3;
+    tryLeftMessage.innerText = 3 + " try left";
     failedMessage.style.display = "none";
     successMessage.style.display = "none";
 }
