@@ -43,7 +43,7 @@ submitButton.addEventListener("click", function () {
         removeUserInput();
         totalTry = totalTry - 1;
         tryLeftMessage.innerText = totalTry + " try left";
-    } else if (generatedCode == userInput) {
+    } else if (generatedCode == userInput && userInput != "") {
         successMessage.style.display = "block";
         failedMessage.style.display = "none";
         removeUserInput();
